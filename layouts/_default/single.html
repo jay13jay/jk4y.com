@@ -16,7 +16,9 @@
             </div>
         {{ end }}
 
-        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-light glow-text">{{ .Title }}</h1>
+        <div class="page-title-card mb-6">
+            <h1 class="text-4xl md:text-5xl font-bold text-light glow-text">{{ .Title }}</h1>
+        </div>
 
         <!-- Cover image with smart glow if present -->
         {{ if .Params.coverImage }}

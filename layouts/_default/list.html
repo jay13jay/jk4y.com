@@ -1,8 +1,10 @@
 {{ define "main" }}
 <div class="w-full md:w-3/4 lg:w-2/3 mx-auto px-6 py-12 specular-overlay">
-    <h1 class="text-4xl md:text-5xl font-bold mb-12 text-light glow-text">{{ .Title }}</h1>
+    <div class="page-title-card mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-light glow-text">{{ .Title }}</h1>
+    </div>
     
-    <div class="space-y-6">
+    <div class="space-y-10">
         {{ range .Pages }}
         <article class="sacred-card p-6">
             <time datetime="{{ .Date.Format "2006-01-02" }}" class="text-text-secondary-dark text-sm block mb-2">

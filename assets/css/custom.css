@@ -7,17 +7,17 @@
   --void: #011627;           /* Ink Black - primary background */
   --void-light: #021b2e;     /* Slightly lighter Ink for secondary surfaces */
   --void-lighter: #03233a;   /* Even lighter for tertiary surfaces */
-  --cerulean: #007ea7;       /* Primary accent - cool blue */
+  --cerulean: #0097c4;       /* Primary accent - cerulean blue */
   --amber: #ff9f1c;          /* Warm accent - gold/orange */
-  --ember: #ba0000;          /* Secondary accent - red (rare use) */
+  --ember: #0077a8;          /* Secondary accent - deep cerulean (rare use) */
   --light: #f5f9ff;          /* Alice Blue - primary text */
 
   /* Derived Glow Color Stops - Cerulean */
-  --cerulean-glow-subtle: rgba(0, 126, 167, 0.08);
-  --cerulean-glow-soft: rgba(0, 126, 167, 0.15);
-  --cerulean-glow-mid: rgba(0, 126, 167, 0.35);
-  --cerulean-glow-strong: rgba(0, 126, 167, 0.45);
-  --cerulean-glow-intense: rgba(0, 126, 167, 0.6);
+  --cerulean-glow-subtle: rgba(0, 151, 196, 0.08);
+  --cerulean-glow-soft: rgba(0, 151, 196, 0.15);
+  --cerulean-glow-mid: rgba(0, 151, 196, 0.35);
+  --cerulean-glow-strong: rgba(0, 151, 196, 0.45);
+  --cerulean-glow-intense: rgba(0, 151, 196, 0.6);
 
   /* Derived Glow Color Stops - Amber */
   --amber-glow-soft: rgba(255, 159, 28, 0.3);
@@ -26,8 +26,8 @@
   /* Derived Glow Color Stops - Text/Border */
   --light-muted: rgba(245, 249, 255, 0.6);
   --light-dim: rgba(245, 249, 255, 0.4);
-  --cerulean-border: rgba(0, 126, 167, 0.25);
-  --cerulean-border-light: rgba(0, 126, 167, 0.35);
+  --cerulean-border: rgba(0, 151, 196, 0.25);
+  --cerulean-border-light: rgba(0, 151, 196, 0.35);
 }
 
 /* ============================================
@@ -65,13 +65,13 @@ body::before {
       60deg,
       transparent,
       transparent 40px,
-      rgba(0, 126, 167, 0.05) 41px
+      rgba(0, 151, 196, 0.05) 41px
     ),
     repeating-linear-gradient(
       -60deg,
       transparent,
       transparent 40px,
-      rgba(0, 126, 167, 0.05) 41px
+      rgba(0, 151, 196, 0.05) 41px
     );
   pointer-events: none;
   z-index: 0;
@@ -148,6 +148,22 @@ h2 {
 }
 
 /* ============================================
+   PAGE TITLE CARD
+   Backing card for the top-level page heading
+   ============================================ */
+
+.page-title-card {
+  background: rgba(0, 151, 196, 0.06);
+  border: 1px solid var(--cerulean-border-light);
+  border-left: 4px solid var(--cerulean);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  box-shadow:
+    inset 0 1px 0 rgba(245, 249, 255, 0.06),
+    0 0 30px var(--cerulean-glow-soft);
+}
+
+/* ============================================
    SACRED CARD - GLASSMORPHIC CONTAINER
    ============================================ */
 
@@ -156,7 +172,7 @@ h2 {
   background: rgba(1, 22, 39, 0.38);
   border: 1px solid var(--cerulean-border-light);
   /* Top-edge specular highlight reinforces the glass illusion */
-  border-top-color: rgba(0, 126, 167, 0.5);
+  border-top-color: rgba(0, 151, 196, 0.5);
   backdrop-filter: blur(18px) saturate(1.4);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
   box-shadow:
@@ -199,7 +215,8 @@ h2 {
   position: relative;
   border-radius: 28px;
   border: 1px solid var(--cerulean-border);
-  background: radial-gradient(circle at 50% 55%, rgba(0, 126, 167, 0.5), transparent 94%);
+  /* background: radial-gradient(circle at 50% 55%, rgba(0, 151, 196, 0.5), transparent 94%); */
+  background: radial-gradient(circle at 50% 55%, rgba(0, 151, 196, 0.5), transparent 84%);
 }
 
 /* Ambient halo — softly visible at rest, stronger on hover */
@@ -332,6 +349,144 @@ h2 {
   color: var(--light-muted);
   font-style: italic;
   padding-left: 1rem;
+}
+
+/* ============================================
+   PROSE HEADING HIERARCHY
+   Left-border accents + spacing create a clear
+   visual level structure without card clutter.
+   h1 = in-content #    (largest, cerulean bar)
+   h2 = primary ##      (cerulean bar, divider)
+   h3 = sub-section ### (amber bar, indented)
+   h4 = detail ####     (muted, small-caps)
+   ============================================ */
+
+/* # — largest in-content heading */
+.prose h1 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  border-left: 4px solid var(--cerulean);
+  padding-left: 0.85em;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  text-shadow:
+    0 0 10px var(--cerulean-glow-mid),
+    0 0 22px var(--cerulean-glow-soft);
+}
+
+.prose h1::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, var(--cerulean-border-light), transparent);
+  margin-bottom: 0.75rem;
+}
+
+/* ## — primary section */
+.prose h2 {
+  font-size: clamp(1.35rem, 2.75vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.25;
+  /* Strong cerulean left bar — marks a new top-level section */
+  border-left: 4px solid var(--cerulean);
+  padding-left: 0.85em;
+  padding-top: 0;
+  padding-bottom: 0;
+  /* Clear section break above */
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow:
+    0 0 10px var(--cerulean-glow-mid),
+    0 0 22px var(--cerulean-glow-soft);
+}
+
+/* Thin divider line above each h2 to visually cut sections */
+.prose h2::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, var(--cerulean-border-light), transparent);
+  margin-bottom: 0.75rem;
+}
+
+/* ### — sub-section */
+.prose h3 {
+  font-size: clamp(1.1rem, 2.25vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.3;
+  /* Amber left bar, thinner + indented → child of h2 */
+  border-left: 2px solid var(--amber);
+  padding-left: 0.75em;
+  margin-left: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 0.9rem;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: 0 0 8px rgba(255, 159, 28, 0.35);
+  color: var(--light);
+}
+
+/* #### — detail */
+.prose h4 {
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 1.4;
+  /* No bar — just muted color, more indented */
+  margin-left: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+  color: var(--light-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Increase inter-element gap when a heading follows other content */
+.prose > * + h1 { margin-top: 3.5rem; }
+.prose > * + h2 { margin-top: 3.5rem; }
+.prose > * + h3 { margin-top: 2.25rem; }
+.prose > * + h4 { margin-top: 1.75rem; }
+
+/* Wrap the content after headings in a visual section card via a
+   container applied on the prose block itself */
+.prose > p,
+.prose > ul,
+.prose > ol,
+.prose > blockquote,
+.prose > pre,
+.prose > table {
+  background: rgba(1, 22, 39, 0.3);
+  border: 1px solid rgba(0, 151, 196, 0.12);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Keep code blocks' own darker background intact */
+.prose > pre {
+  background: rgba(1, 22, 39, 0.8);
+  border-color: var(--cerulean-border-light);
+  padding: 1em;
+}
+
+/* Lists need a bit more left room since they have item markers */
+.prose > ul,
+.prose > ol {
+  padding-left: 2rem;
+}
+
+/* Tables should not double-pad */
+.prose > table {
+  padding: 0;
+  overflow: hidden;
 }
 
 /* ============================================
