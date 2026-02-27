@@ -44,7 +44,7 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --baseURL "https://emergent-rva.com/"
+            --baseURL "https://jhax.dev/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
